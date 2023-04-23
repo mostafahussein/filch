@@ -1,0 +1,55 @@
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: MutatingWebhookConfiguration
+metadata:
+  creationTimestamp: null
+  name: mutating-webhook-configuration
+webhooks:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
+    service:
+      name: webhook-service
+      namespace: system
+      path: /mutate-filch-caretaker-sh-v1-mrsnorrisjob
+  failurePolicy: Fail
+  name: mmrsnorrisjob.kb.io
+  rules:
+  - apiGroups:
+    - filch.caretaker.sh
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    - UPDATE
+    resources:
+    - mrsnorrisjobs
+  sideEffects: None
+---
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  creationTimestamp: null
+  name: validating-webhook-configuration
+webhooks:
+- admissionReviewVersions:
+  - v1
+  clientConfig:
+    service:
+      name: webhook-service
+      namespace: system
+      path: /validate-filch-caretaker-sh-v1-mrsnorrisjob
+  failurePolicy: Fail
+  name: vmrsnorrisjob.kb.io
+  rules:
+  - apiGroups:
+    - filch.caretaker.sh
+    apiVersions:
+    - v1
+    operations:
+    - CREATE
+    - UPDATE
+    - DELETE
+    resources:
+    - mrsnorrisjobs
+  sideEffects: None

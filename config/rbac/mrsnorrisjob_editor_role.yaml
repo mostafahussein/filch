@@ -1,0 +1,31 @@
+# permissions for end users to edit mrsnorrisjobs.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: mrsnorrisjob-editor-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: filch
+    app.kubernetes.io/part-of: filch
+    app.kubernetes.io/managed-by: kustomize
+  name: mrsnorrisjob-editor-role
+rules:
+- apiGroups:
+  - filch.caretaker.sh
+  resources:
+  - mrsnorrisjobs
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - filch.caretaker.sh
+  resources:
+  - mrsnorrisjobs/status
+  verbs:
+  - get

@@ -1,0 +1,27 @@
+# permissions for end users to view mrsnorrisjobs.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  labels:
+    app.kubernetes.io/name: clusterrole
+    app.kubernetes.io/instance: mrsnorrisjob-viewer-role
+    app.kubernetes.io/component: rbac
+    app.kubernetes.io/created-by: filch
+    app.kubernetes.io/part-of: filch
+    app.kubernetes.io/managed-by: kustomize
+  name: mrsnorrisjob-viewer-role
+rules:
+- apiGroups:
+  - filch.caretaker.sh
+  resources:
+  - mrsnorrisjobs
+  verbs:
+  - get
+  - list
+  - watch
+- apiGroups:
+  - filch.caretaker.sh
+  resources:
+  - mrsnorrisjobs/status
+  verbs:
+  - get
